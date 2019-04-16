@@ -1,8 +1,8 @@
-select * from passengers
-inner join tickets
-on passengers.id = tickets.passenger_id
-where tickets.id in (
-select id from flights
-where DAYOFYEAR(date_add(flightDate, interval 3 day)) >= DAYOFYEAR(passengers.birthdayDay)
-and DAYOFYEAR(date_sub(flightDate,  interval 3 day))  <= DAYOFYEAR(passengers.birthdayDay)
-);
+SELECT * FROM passengers WHERE id IN (
+SELECT passenger_id from tickets WHERE id IN (
+SELECT ticket_id FROM flights_tickets WHERE flight_id IN (
+select f.id from flights f
+inner join passengers p
+on
+DAYOFYEAR(date_add(flight_date, interval 3 day)) >= DAYOFYEAR(p.birthday_day)
+and DAYOFYEAR(date_sub(flight_date,  interval 3 day))  <= DAYOFYEAR(p.birthday_day))));
