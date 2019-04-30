@@ -4,15 +4,15 @@ package com.aviatickets.model;
 public class Ticket {
     private int id;
     private String status;
-    private int passengerId;
+    private Passenger passenger;
     private String created;
     private String seatType;
     private double price;
 
-    public Ticket(int id, String status, int passengerId, String created, String seatType, double price) {
+    public Ticket(int id, String status, Passenger passenger, String created, String seatType, double price) {
         this.id = id;
         this.status = status;
-        this.passengerId = passengerId;
+        this.passenger = passenger;
         this.created = created;
         this.seatType = seatType;
         this.price = price;
@@ -34,12 +34,12 @@ public class Ticket {
         this.status = status;
     }
 
-    public int getPassengerId() {
-        return passengerId;
+    public Passenger getPassenger() {
+        return passenger;
     }
 
-    public void setPassengerId(int passengerId) {
-        this.passengerId = passengerId;
+    public void setPassenger(Passenger passenger) {
+        this.passenger = passenger;
     }
 
     public String getCreated() {
@@ -71,7 +71,7 @@ public class Ticket {
         return "Ticket{" +
                 "id=" + id +
                 ", status='" + status + '\'' +
-                ", passengerId=" + passengerId +
+                ", passenger=" + passenger +
                 ", created='" + created + '\'' +
                 ", seatType='" + seatType + '\'' +
                 ", price=" + price +

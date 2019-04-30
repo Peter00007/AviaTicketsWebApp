@@ -12,14 +12,13 @@ public class ConsoleHelper {
             "Enter 5, if you want doing CRUD with tables\n" +
             "Enter 'Exit', if you want exit from AviaTicketsApp";
     private final String CRUDMessage = "Enter 1, if you want do crud operation with table aircraft\n" +
-            "Enter 2, if you want do crud operation with table airports\n" +
-            "Enter 3, if you want do crud operation with table flight_routes\n" +
-            "Enter 4, if you want do crud operation with table flights\n" +
-            "Enter 5, if you want do crud operation with table flights_tickets\n" +
-            "Enter 6, if you want do crud operation with table passengers\n" +
-            "Enter 7, if you want do crud operation with table route_airports\n" +
-            "Enter 8, if you want do crud operation with table routes\n" +
-            "Enter 9, if you want do crud operation with table tickets\n" +
+            "Enter 2, if you want do crud operation from table airports\n" +
+            "Enter 3, if you want do crud operation from table flights\n" +
+            "Enter 4, if you want do crud operation from table passengers\n" +
+            "Enter 5, if you want do crud operation from table routes\n" +
+            "Enter 6, if you want do crud operation from table tickets\n" +
+            "Enter 7, if you want do create/delete data from table flights_routes\n" +
+            "Enter 8, if you want do create/delete data from table routes_airports\n" +
             "Enter 'Exit', if you want exit from this menu";
 
     Scanner in;
@@ -27,10 +26,7 @@ public class ConsoleHelper {
     TicketView ticketView;
     AircraftView aircraftView;
     AirportView airportView;
-    FlightRouteView flightRouteView;
-    FlightTicketView flightTicketView;
     PassengerView passengerView;
-    RouteAirportView routeAirportView;
     RouteView routeView;
 
     public ConsoleHelper() {
@@ -39,10 +35,7 @@ public class ConsoleHelper {
         ticketView = new TicketView();
         aircraftView = new AircraftView();
         airportView = new AirportView();
-        flightRouteView = new FlightRouteView();
-        flightTicketView = new FlightTicketView();
         passengerView = new PassengerView();
-        routeAirportView = new RouteAirportView();
         routeView = new RouteView();
     }
 
@@ -78,25 +71,22 @@ public class ConsoleHelper {
                                 airportView.CRUDAirport();
                                 break;
                             case "3":
-                                flightRouteView.CRUDFlightRoute();
-                                break;
-                            case "4":
                                 flightView.CRUDFlight();
                                 break;
-                            case "5":
-                                flightTicketView.CRUDFlightsTickets();
-                                break;
-                            case "6":
+                            case "4":
                                 passengerView.CRUDPassenger();
                                 break;
-                            case "7":
-                                routeAirportView.CRUDRouteAirport();
-                                break;
-                            case "8":
+                            case "5":
                                 routeView.CRUDRoute();
                                 break;
-                            case "9":
+                            case "6":
                                 ticketView.CRUDTicket();
+                                break;
+                            case "7":
+                                flightView.CRFlightsRoutes();
+                                break;
+                            case "8":
+                                routeView.CRRouteAirport();
                                 break;
                         }
                     } while (!crudChoice.equalsIgnoreCase("Exit"));

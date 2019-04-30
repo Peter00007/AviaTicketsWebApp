@@ -2,6 +2,7 @@ package com.aviatickets.view;
 
 
 import com.aviatickets.controller.PassengerController;
+import com.aviatickets.model.Passenger;
 
 import java.util.Scanner;
 
@@ -10,10 +11,12 @@ public class PassengerView {
 
     Scanner in;
 
-    private final String startMessage = "Enter 1, if you want create values into passengers\n" +
-            "Enter 2, if you want read data with passengers\n" +
-            "Enter 3, if you want update values into passengers\n" +
-            "Enter 4, if you want delete values from passengers\n" +
+    private final String startMessage = "Enter 1, if you want save values into passenger\n" +
+            "Enter 2, if you want get by ID data with passenger\n" +
+            "Enter 3, if you want get all data with passenger\n" +
+            "Enter 4, if you want update values into passenger\n" +
+            "Enter 5, if you want delete by object values from passenger\n" +
+            "Enter 6, if you want delete by Id values from passenger\n" +
             "Enter 'Exit', if you want exit from this menu";
     private final String idPassengerMessage = "Input id passenger";
     private final String firstNameMessage = "Input first name passengers";
@@ -32,18 +35,26 @@ public class PassengerView {
             choice = in.next();
             switch (choice) {
                 case "1":
+                    System.out.println(idPassengerMessage);
+                    int idPassenger = in.nextInt();
                     System.out.println(firstNameMessage);
                     String firstName = in.next();
                     System.out.println(lastNameMessage);
                     String lastName = in.next();
                     System.out.println(birthdayMessage);
                     String birthday = in.next();
-                    System.out.println(passengerController.insert(firstName, lastName, birthday));
+                    Passenger passenger = new Passenger(idPassenger, firstName, lastName, birthday);
+                    System.out.println(passengerController.save(passenger));
                     break;
                 case "2":
-                    System.out.println(passengerController.read());
+                    System.out.println(idPassengerMessage);
+                    int getIdPassenger = in.nextInt();
+                    System.out.println(passengerController.getById(getIdPassenger));
                     break;
                 case "3":
+                    System.out.println(passengerController.getAll());
+                    break;
+                case "4":
                     System.out.println(idPassengerMessage);
                     int id = in.nextInt();
                     System.out.println(firstNameMessage);
@@ -52,12 +63,25 @@ public class PassengerView {
                     String lName = in.next();
                     System.out.println(birthdayMessage);
                     String birth = in.next();
-                    System.out.println(passengerController.update(id, fName, lName, birth));
+                    Passenger updatePassenger = new Passenger(id, fName, lName, birth);
+                    System.out.println(passengerController.update(updatePassenger));
                     break;
-                case "4":
+                case "5":
                     System.out.println(idPassengerMessage);
-                    int identifier = in.nextInt();
-                    passengerController.delete(identifier);
+                    int idDelete = in.nextInt();
+                    System.out.println(firstNameMessage);
+                    String fNameDelete = in.next();
+                    System.out.println(lastNameMessage);
+                    String lNameDelete = in.next();
+                    System.out.println(birthdayMessage);
+                    String birthDelete = in.next();
+                    Passenger passengerDelete = new Passenger(idDelete, fNameDelete, lNameDelete, birthDelete);
+                    passengerController.deleteByObject(passengerDelete);
+                    break;
+                case "6":
+                    System.out.println(idPassengerMessage);
+                    int idPassengerDelete = in.nextInt();
+                    passengerController.delete(idPassengerDelete);
                     break;
             }
         } while (!choice.equalsIgnoreCase("Exit"));

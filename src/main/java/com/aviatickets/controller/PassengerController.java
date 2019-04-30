@@ -2,6 +2,7 @@ package com.aviatickets.controller;
 
 import com.aviatickets.model.Passenger;
 import com.aviatickets.repository.PassengerRepository;
+import com.aviatickets.repository.jdbc.JdbcPassengerRepositoryImpl;
 
 import java.util.List;
 
@@ -9,26 +10,30 @@ public class PassengerController {
     PassengerRepository passengerRepository;
 
     public PassengerController() {
-        passengerRepository = new PassengerRepository();
+        passengerRepository = new JdbcPassengerRepositoryImpl();
     }
 
-    public Passenger insert(String firstName, String lastName, String birthday) {
-        return passengerRepository.insert(firstName, lastName, birthday);
+    public Passenger save(Passenger passenger) {
+        return passengerRepository.save(passenger);
     }
 
-    public List<Passenger> read() {
-        return passengerRepository.read();
+    public Passenger getById(int id) {
+        return passengerRepository.getById(id);
     }
 
-    public Passenger update(int id, String firstName, String lastName, String birthday) {
-        return passengerRepository.update(id, firstName, lastName, birthday);
+    public List<Passenger> getAll() {
+        return passengerRepository.getAll();
+    }
+
+    public Passenger update(Passenger passenger) {
+        return passengerRepository.update(passenger);
     }
 
     public void delete(int id) {
         passengerRepository.delete(id);
     }
 
-    public int getIdPassenger(String firstName, String lastName, String birthday) {
-        return passengerRepository.getIdPassenger(firstName, lastName, birthday);
+    public void deleteByObject(Passenger passenger) {
+        passengerRepository.deleteByObject(passenger);
     }
 }

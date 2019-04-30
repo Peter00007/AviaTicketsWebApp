@@ -3,6 +3,7 @@ package com.aviatickets.controller;
 
 import com.aviatickets.model.Airport;
 import com.aviatickets.repository.AirportRepository;
+import com.aviatickets.repository.jdbc.JdbcAirportRepositoryImpl;
 
 import java.util.List;
 
@@ -10,22 +11,30 @@ public class AirportController {
     AirportRepository airportRepository;
 
     public AirportController() {
-        airportRepository = new AirportRepository();
+        airportRepository = new JdbcAirportRepositoryImpl();
     }
 
-    public Airport insert(String name) {
-        return airportRepository.insert(name);
+    public Airport save(Airport airport) {
+        return airportRepository.save(airport);
     }
 
-    public List<Airport> read() {
-        return airportRepository.read();
+    public Airport getById(int id) {
+        return airportRepository.getById(id);
     }
 
-    public Airport update(int id, String name) {
-        return airportRepository.update(id, name);
+    public List<Airport> getAll() {
+        return airportRepository.getAll();
+    }
+
+    public Airport update(Airport airport) {
+        return airportRepository.update(airport);
     }
 
     public void delete(int id) {
         airportRepository.delete(id);
+    }
+
+    public void deleteByObject(Airport airport) {
+        airportRepository.deleteByObject(airport);
     }
 }

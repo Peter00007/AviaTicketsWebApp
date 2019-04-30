@@ -2,12 +2,12 @@ package com.aviatickets.model;
 
 public class Flight {
     private int id;
-    private int aircraftId;
+    private Aircraft aircraft;
     private String flightDate;
 
-    public Flight(int id, int aircraftId, String flightDate) {
+    public Flight(int id, Aircraft aircraft, String flightDate) {
         this.id = id;
-        this.aircraftId = aircraftId;
+        this.aircraft = aircraft;
         this.flightDate = flightDate;
     }
 
@@ -19,12 +19,12 @@ public class Flight {
         this.id = id;
     }
 
-    public int getAircraftId() {
-        return aircraftId;
+    public Aircraft getAircraft() {
+        return aircraft;
     }
 
-    public void setAircraftId(int aircraftId) {
-        this.aircraftId = aircraftId;
+    public void setAircraft(Aircraft aircraft) {
+        this.aircraft = aircraft;
     }
 
     public String getFlightDate() {
@@ -37,9 +37,9 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Flights{" +
+        return "Flight{" +
                 "id=" + id +
-                ", aircraftId=" + aircraftId +
+                ", aircraft=" + aircraft +
                 ", flightDate='" + flightDate + '\'' +
                 '}';
     }

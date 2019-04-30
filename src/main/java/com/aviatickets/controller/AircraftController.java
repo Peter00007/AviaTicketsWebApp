@@ -3,6 +3,7 @@ package com.aviatickets.controller;
 
 import com.aviatickets.model.Aircraft;
 import com.aviatickets.repository.AircraftRepository;
+import com.aviatickets.repository.jdbc.JdbcAircraftRepositoryImpl;
 
 import java.util.List;
 
@@ -10,22 +11,30 @@ public class AircraftController {
     AircraftRepository aircraftRepository;
 
     public AircraftController() {
-        aircraftRepository = new AircraftRepository();
+        aircraftRepository = new JdbcAircraftRepositoryImpl();
     }
 
-    public Aircraft insert(String name) {
-        return aircraftRepository.insert(name);
+    public Aircraft save(Aircraft aircraft) {
+        return aircraftRepository.save(aircraft);
     }
 
-    public List<Aircraft> read() {
-        return aircraftRepository.read();
+    public Aircraft getById(int id) {
+        return aircraftRepository.getById(id);
     }
 
-    public Aircraft update (int id, String name) {
-        return aircraftRepository.update(id, name);
+    public List<Aircraft> getAll() {
+        return aircraftRepository.getAll();
     }
 
-    public void delete (int id) {
+    public Aircraft update(Aircraft aircraft) {
+        return aircraftRepository.update(aircraft);
+    }
+
+    public void delete(int id) {
         aircraftRepository.delete(id);
+    }
+
+    public void deleteByObject(Aircraft aircraft) {
+        aircraftRepository.deleteByObject(aircraft);
     }
 }

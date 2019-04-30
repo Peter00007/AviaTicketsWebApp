@@ -3,6 +3,7 @@ package com.aviatickets.controller;
 
 import com.aviatickets.model.Route;
 import com.aviatickets.repository.RouteRepository;
+import com.aviatickets.repository.jdbc.JdbcRouteRepositoryImpl;
 
 import java.util.List;
 
@@ -10,22 +11,38 @@ public class RouteController {
     RouteRepository routeRepository;
 
     public RouteController() {
-        routeRepository = new RouteRepository();
+        routeRepository = new JdbcRouteRepositoryImpl();
     }
 
-    public Route insert(String name) {
-        return routeRepository.insert(name);
+    public Route save(Route route) {
+        return routeRepository.save(route);
     }
 
-    public List<Route> read() {
-        return routeRepository.read();
+    public Route getById(int id) {
+        return routeRepository.getById(id);
     }
 
-    public Route update (int id, String name) {
-        return routeRepository.update(id, name);
+    public List<Route> getAll() {
+        return routeRepository.getAll();
     }
 
-    public void delete (int id) {
+    public Route update(Route route) {
+        return routeRepository.update(route);
+    }
+
+    public void delete(int id) {
         routeRepository.delete(id);
+    }
+
+    public void deleteByObject(Route route) {
+        routeRepository.deleteByObject(route);
+    }
+
+    public void addRouteAirport(int idRoute, int idAirport, String airportType) {
+        routeRepository.addRouteAirport(idRoute, idAirport, airportType);
+    }
+
+    public void deleteRouteAirport(int idRoute, int idAirport, String airportType) {
+        routeRepository.deleteRouteAirport(idRoute, idAirport, airportType);
     }
 }
