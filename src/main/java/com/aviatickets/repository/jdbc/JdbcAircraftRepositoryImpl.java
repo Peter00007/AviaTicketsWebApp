@@ -39,7 +39,7 @@ public class JdbcAircraftRepositoryImpl implements AircraftRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return air;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class JdbcAircraftRepositoryImpl implements AircraftRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return aircraft;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,7 +88,7 @@ public class JdbcAircraftRepositoryImpl implements AircraftRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return list;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,7 +114,7 @@ public class JdbcAircraftRepositoryImpl implements AircraftRepository {
             }
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return air;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -131,7 +131,7 @@ public class JdbcAircraftRepositoryImpl implements AircraftRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -145,7 +145,7 @@ public class JdbcAircraftRepositoryImpl implements AircraftRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }

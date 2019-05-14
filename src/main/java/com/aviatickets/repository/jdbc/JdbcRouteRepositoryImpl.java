@@ -42,7 +42,7 @@ public class JdbcRouteRepositoryImpl implements RouteRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return newRoute;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class JdbcRouteRepositoryImpl implements RouteRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return route;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,7 +87,7 @@ public class JdbcRouteRepositoryImpl implements RouteRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return list;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -113,7 +113,7 @@ public class JdbcRouteRepositoryImpl implements RouteRepository {
             }
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return newRoute;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -130,7 +130,7 @@ public class JdbcRouteRepositoryImpl implements RouteRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -144,7 +144,7 @@ public class JdbcRouteRepositoryImpl implements RouteRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -160,7 +160,7 @@ public class JdbcRouteRepositoryImpl implements RouteRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -176,7 +176,7 @@ public class JdbcRouteRepositoryImpl implements RouteRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }

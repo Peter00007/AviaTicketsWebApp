@@ -15,7 +15,6 @@ public class JdbcAirportRepositoryImpl implements AirportRepository {
     private final String sqlGetById = "SELECT * FROM airports WHERE id = ?";
     private final String sqlGetAll = "SELECT * FROM airports";
     private final String sqlUpdate = "UPDATE airports SET name = ? WHERE id = ?";
-    private final String sqlUpdateWhere = "SELECT * FROM airports where id = ";
     private final String sqlDelete = "DELETE FROM airports WHERE id = ? and name = ?";
     private final String sqlDeleteById = "DELETE FROM airports WHERE id = ?";
 
@@ -37,7 +36,7 @@ public class JdbcAirportRepositoryImpl implements AirportRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return air;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,7 +59,7 @@ public class JdbcAirportRepositoryImpl implements AirportRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return airport;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,7 +82,7 @@ public class JdbcAirportRepositoryImpl implements AirportRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return list;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,7 +109,7 @@ public class JdbcAirportRepositoryImpl implements AirportRepository {
             }
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return air;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -127,7 +126,7 @@ public class JdbcAirportRepositoryImpl implements AirportRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -141,7 +140,7 @@ public class JdbcAirportRepositoryImpl implements AirportRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }

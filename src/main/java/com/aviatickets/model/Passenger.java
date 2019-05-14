@@ -1,10 +1,27 @@
 package com.aviatickets.model;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "passengers")
 public class Passenger {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "birthday_day")
     private String birthday;
+
+    @OneToMany(mappedBy = "passenger", fetch = FetchType.EAGER)
+    private List<Ticket> ticketCollections;
+
+    public Passenger() {
+    }
 
     public Passenger(int id, String firstName, String lastName, String birthday) {
         this.id = id;
@@ -43,6 +60,14 @@ public class Passenger {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public List<Ticket> getTicketCollections() {
+        return ticketCollections;
+    }
+
+    public void setTicketCollections(List<Ticket> ticketCollections) {
+        this.ticketCollections = ticketCollections;
     }
 
     @Override

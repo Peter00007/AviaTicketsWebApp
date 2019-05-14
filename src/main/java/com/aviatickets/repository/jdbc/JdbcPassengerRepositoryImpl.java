@@ -37,7 +37,7 @@ public class JdbcPassengerRepositoryImpl implements PassengerRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -60,7 +60,7 @@ public class JdbcPassengerRepositoryImpl implements PassengerRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return passenger;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -84,7 +84,7 @@ public class JdbcPassengerRepositoryImpl implements PassengerRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return list;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,7 +112,7 @@ public class JdbcPassengerRepositoryImpl implements PassengerRepository {
             }
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -130,7 +130,7 @@ public class JdbcPassengerRepositoryImpl implements PassengerRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -144,41 +144,9 @@ public class JdbcPassengerRepositoryImpl implements PassengerRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-   /* public int getIdPassenger(String firstName, String lastName, String birthday) {
-        try {
-            Class.forName(JDBCData.JDBC_DRIVER);
-
-            connection = DriverManager.getConnection(JDBCData.DATABASE_URL, JDBCData.USER, JDBCData.PASSWORD);
-
-            sql = "SELECT * FROM passengers WHERE first_name =? and last_name = ? and birthday_day = DATE (?)";
-
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            preparedStatement.setString(3, birthday);
-            preparedStatement.execute();
-
-            resultSet = preparedStatement.executeQuery();
-            int identifier = 1;
-            if (resultSet.next()) {
-                identifier = resultSet.getInt(1);
-            }
-
-            resultSet.close();
-            preparedStatement.close();
-            connection.close();
-            return identifier;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }*/
 }

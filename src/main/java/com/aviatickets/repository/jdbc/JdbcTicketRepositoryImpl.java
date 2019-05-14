@@ -56,7 +56,7 @@ public class JdbcTicketRepositoryImpl implements TicketRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return newTicket;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -80,7 +80,7 @@ public class JdbcTicketRepositoryImpl implements TicketRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return ticket;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,7 +105,7 @@ public class JdbcTicketRepositoryImpl implements TicketRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return list;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -137,7 +137,7 @@ public class JdbcTicketRepositoryImpl implements TicketRepository {
             }
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return newTicket;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -158,7 +158,7 @@ public class JdbcTicketRepositoryImpl implements TicketRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -172,7 +172,7 @@ public class JdbcTicketRepositoryImpl implements TicketRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -198,7 +198,7 @@ public class JdbcTicketRepositoryImpl implements TicketRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return list;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -214,7 +214,7 @@ public class JdbcTicketRepositoryImpl implements TicketRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -228,7 +228,7 @@ public class JdbcTicketRepositoryImpl implements TicketRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }

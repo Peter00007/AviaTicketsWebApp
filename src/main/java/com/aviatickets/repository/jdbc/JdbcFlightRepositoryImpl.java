@@ -54,7 +54,7 @@ public class JdbcFlightRepositoryImpl implements FlightRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return newFlight;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,7 +78,7 @@ public class JdbcFlightRepositoryImpl implements FlightRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return flight;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -102,7 +102,7 @@ public class JdbcFlightRepositoryImpl implements FlightRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return list;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -132,7 +132,7 @@ public class JdbcFlightRepositoryImpl implements FlightRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return newFlight;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -150,7 +150,7 @@ public class JdbcFlightRepositoryImpl implements FlightRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -164,7 +164,7 @@ public class JdbcFlightRepositoryImpl implements FlightRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -192,7 +192,7 @@ public class JdbcFlightRepositoryImpl implements FlightRepository {
 
             resultSet.close();
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
             return list;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -209,7 +209,7 @@ public class JdbcFlightRepositoryImpl implements FlightRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -224,7 +224,7 @@ public class JdbcFlightRepositoryImpl implements FlightRepository {
             preparedStatement.execute();
 
             preparedStatement.close();
-            ConnectionUtil.getConnection().close();
+            ConnectionUtil.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -3,7 +3,7 @@ package com.aviatickets.controller;
 
 import com.aviatickets.model.Aircraft;
 import com.aviatickets.repository.AircraftRepository;
-import com.aviatickets.repository.jdbc.JdbcAircraftRepositoryImpl;
+import com.aviatickets.repository.hibernate.HibernateAircraftRepositoryImpl;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class AircraftController {
     AircraftRepository aircraftRepository;
 
     public AircraftController() {
-        aircraftRepository = new JdbcAircraftRepositoryImpl();
+        aircraftRepository = new HibernateAircraftRepositoryImpl();
     }
 
     public Aircraft save(Aircraft aircraft) {
