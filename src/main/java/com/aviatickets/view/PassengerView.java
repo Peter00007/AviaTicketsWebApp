@@ -35,15 +35,13 @@ public class PassengerView {
             choice = in.next();
             switch (choice) {
                 case "1":
-                    System.out.println(idPassengerMessage);
-                    int idPassenger = in.nextInt();
                     System.out.println(firstNameMessage);
                     String firstName = in.next();
                     System.out.println(lastNameMessage);
                     String lastName = in.next();
                     System.out.println(birthdayMessage);
                     String birthday = in.next();
-                    Passenger passenger = new Passenger(idPassenger, firstName, lastName, birthday);
+                    Passenger passenger = new Passenger(firstName, lastName, birthday);
                     System.out.println(passengerController.save(passenger));
                     break;
                 case "2":
@@ -52,7 +50,9 @@ public class PassengerView {
                     System.out.println(passengerController.getById(getIdPassenger));
                     break;
                 case "3":
-                    System.out.println(passengerController.getAll());
+                    for (Passenger passengers : passengerController.getAll()) {
+                        System.out.println(passengers);
+                    }
                     break;
                 case "4":
                     System.out.println(idPassengerMessage);

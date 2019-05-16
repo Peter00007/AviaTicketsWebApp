@@ -12,7 +12,7 @@ import java.util.List;
 
 public class JdbcRouteRepositoryImpl implements RouteRepository {
 
-    private final String sqlSave = "INSERT INTO routes(id, name) VALUES (?, ?)";
+    private final String sqlSave = "INSERT INTO routes(name) VALUES (?)";
     private final String sqlGetById = "SELECT * FROM routes WHERE id = ?";
     private final String sqlGetAll = "SELECT * FROM routes";
     private final String sqlUpdate = "UPDATE routes SET name = ? WHERE id = ?";
@@ -27,8 +27,7 @@ public class JdbcRouteRepositoryImpl implements RouteRepository {
     public Route save(Route route) {
         try {
             PreparedStatement preparedStatement = ConnectionUtil.getConnection().prepareStatement(sqlSave);
-            preparedStatement.setInt(1, route.getId());
-            preparedStatement.setString(2, route.getName());
+            preparedStatement.setString(1, route.getName());
             preparedStatement.execute();
 
             preparedStatement = ConnectionUtil.getConnection().prepareStatement(sqlGetById);

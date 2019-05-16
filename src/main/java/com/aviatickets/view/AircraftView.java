@@ -32,11 +32,9 @@ public class AircraftView {
             choice = in.next();
             switch (choice) {
                 case "1":
-                    System.out.println(idAircraftMessage);
-                    int idAircraft = in.nextInt();
                     System.out.println(nameMessage);
                     String name = in.next();
-                    Aircraft aircraft = new Aircraft(idAircraft, name);
+                    Aircraft aircraft = new Aircraft(name);
                     System.out.println(aircraftController.save(aircraft));
                     break;
                 case "2":
@@ -45,7 +43,9 @@ public class AircraftView {
                     System.out.println(aircraftController.getById(idAir));
                     break;
                 case "3":
-                    System.out.println(aircraftController.getAll());
+                    for (Aircraft aircrafts : aircraftController.getAll()) {
+                        System.out.println(aircrafts);
+                    }
                     break;
                 case "4":
                     System.out.println(idAircraftMessage);

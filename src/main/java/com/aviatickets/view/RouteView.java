@@ -29,6 +29,7 @@ public class RouteView {
 
     public RouteView() {
         routeController = new RouteController();
+        in = new Scanner(System.in);
     }
 
     public void CRUDRoute() {
@@ -38,12 +39,10 @@ public class RouteView {
             choice = in.next();
             switch (choice) {
                 case "1":
-                    System.out.println(idRouteMessage);
-                    int idRoute = in.nextInt();
                     System.out.println(nameMessage);
                     String nameRoute = in.next();
-                    Route route = new Route(idRoute, nameRoute);
-                    System.out.println(routeController.update(route));
+                    Route route = new Route(nameRoute);
+                    System.out.println(routeController.save(route));
                     break;
                 case "2":
                     System.out.println(idRouteMessage);
@@ -51,7 +50,9 @@ public class RouteView {
                     System.out.println(routeController.getById(idAdd));
                     break;
                 case "3":
-                    System.out.println(routeController.getAll());
+                    for (Route routes : routeController.getAll()) {
+                        System.out.println(routes);
+                    }
                     break;
                 case "4":
                     System.out.println(idRouteMessage);
@@ -100,7 +101,7 @@ public class RouteView {
                     int airport = in.nextInt();
                     System.out.println(airportTypeMessage);
                     String type = in.next();
-                    routeController.addRouteAirport(route, airport, type);
+                    routeController.deleteRouteAirport(route, airport, type);
                     break;
             }
         } while (!choice.equalsIgnoreCase("Exit"));

@@ -2,39 +2,38 @@ package com.aviatickets.controller;
 
 
 import com.aviatickets.model.Aircraft;
-import com.aviatickets.repository.AircraftRepository;
-import com.aviatickets.repository.hibernate.HibernateAircraftRepositoryImpl;
+import com.aviatickets.service.AircraftService;
 
 import java.util.List;
 
 public class AircraftController {
-    AircraftRepository aircraftRepository;
+    AircraftService aircraftService;
 
     public AircraftController() {
-        aircraftRepository = new HibernateAircraftRepositoryImpl();
+        aircraftService = new AircraftService();
     }
 
     public Aircraft save(Aircraft aircraft) {
-        return aircraftRepository.save(aircraft);
+        return aircraftService.save(aircraft);
     }
 
     public Aircraft getById(int id) {
-        return aircraftRepository.getById(id);
+        return aircraftService.getById(id);
     }
 
     public List<Aircraft> getAll() {
-        return aircraftRepository.getAll();
+        return aircraftService.getAll();
     }
 
     public Aircraft update(Aircraft aircraft) {
-        return aircraftRepository.update(aircraft);
+        return aircraftService.update(aircraft);
     }
 
     public void delete(int id) {
-        aircraftRepository.delete(id);
+        aircraftService.delete(id);
     }
 
     public void deleteByObject(Aircraft aircraft) {
-        aircraftRepository.deleteByObject(aircraft);
+        aircraftService.deleteByObject(aircraft);
     }
 }

@@ -32,11 +32,9 @@ public class AirportView {
             choice = in.next();
             switch (choice) {
                 case "1":
-                    System.out.println(idAirportMessage);
-                    int id = in.nextInt();
                     System.out.println(nameMessage);
                     String name = in.next();
-                    Airport airport = new Airport(id, name);
+                    Airport airport = new Airport(name);
                     System.out.println(airportController.save(airport));
                     break;
                 case "2":
@@ -45,7 +43,9 @@ public class AirportView {
                     System.out.println(airportController.getById(idAirport));
                     break;
                 case "3":
-                    System.out.println(airportController.getAll());
+                    for (Airport airports : airportController.getAll()) {
+                        System.out.println(airports);
+                    }
                     break;
                 case "4":
                     System.out.println(idAirportMessage);

@@ -1,52 +1,51 @@
 package com.aviatickets.controller;
 
 import com.aviatickets.model.Flight;
-import com.aviatickets.repository.FlightRepository;
-import com.aviatickets.repository.jdbc.JdbcFlightRepositoryImpl;
+import com.aviatickets.service.FlightService;
 
 import java.util.List;
 
 public class FlightController {
-    FlightRepository flightRepository;
+    FlightService flightService;
 
     public FlightController() {
-        flightRepository = new JdbcFlightRepositoryImpl();
+        flightService = new FlightService();
     }
 
     public Flight save(Flight flight) {
-        return flightRepository.save(flight);
+        return flightService.save(flight);
     }
 
     public Flight getById(int id) {
-        return flightRepository.getById(id);
+        return flightService.getById(id);
     }
 
     public List<Flight> getAll() {
-        return flightRepository.getAll();
+        return flightService.getAll();
     }
 
     public Flight update(Flight flight) {
-        return flightRepository.update(flight);
+        return flightService.update(flight);
     }
 
     public void delete(int id) {
-        flightRepository.delete(id);
+        flightService.delete(id);
     }
 
     public void deleteByObject(Flight flight) {
-        flightRepository.deleteByObject(flight);
+        flightService.deleteByObject(flight);
     }
 
     public List<Flight> searchByFlight(String firstDate, String secondDate, String depAirport, String arrAirport) {
-        return flightRepository.searchByFlight(firstDate, secondDate, depAirport, arrAirport);
+        return flightService.searchByFlight(firstDate, secondDate, depAirport, arrAirport);
     }
 
     public void deleteFlightRoute(int idFlight, int idRoute) {
-        flightRepository.deleteFlightRoute(idFlight, idRoute);
+        flightService.deleteFlightRoute(idFlight, idRoute);
     }
 
     public void addFlightRoute(int idFlight, int idRoute) {
-        flightRepository.addFlightRoute(idFlight, idRoute);
+        flightService.addFlightRoute(idFlight, idRoute);
     }
 }
 

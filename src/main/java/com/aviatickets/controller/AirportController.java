@@ -2,39 +2,38 @@ package com.aviatickets.controller;
 
 
 import com.aviatickets.model.Airport;
-import com.aviatickets.repository.AirportRepository;
-import com.aviatickets.repository.jdbc.JdbcAirportRepositoryImpl;
+import com.aviatickets.service.AirportService;
 
 import java.util.List;
 
 public class AirportController {
-    AirportRepository airportRepository;
+    AirportService airportService;
 
     public AirportController() {
-        airportRepository = new JdbcAirportRepositoryImpl();
+        airportService = new AirportService();
     }
 
     public Airport save(Airport airport) {
-        return airportRepository.save(airport);
+        return airportService.save(airport);
     }
 
     public Airport getById(int id) {
-        return airportRepository.getById(id);
+        return airportService.getById(id);
     }
 
     public List<Airport> getAll() {
-        return airportRepository.getAll();
+        return airportService.getAll();
     }
 
     public Airport update(Airport airport) {
-        return airportRepository.update(airport);
+        return airportService.update(airport);
     }
 
     public void delete(int id) {
-        airportRepository.delete(id);
+        airportService.delete(id);
     }
 
     public void deleteByObject(Airport airport) {
-        airportRepository.deleteByObject(airport);
+        airportService.deleteByObject(airport);
     }
 }

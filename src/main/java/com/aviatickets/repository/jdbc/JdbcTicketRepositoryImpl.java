@@ -12,7 +12,7 @@ import java.util.List;
 
 public class JdbcTicketRepositoryImpl implements TicketRepository {
 
-    private final String sqlSave = "INSERT INTO tickets(id, status, passenger_id, created, seat_type, price) VALUES (?, ?, ?, Date(?), ?, ?)";
+    private final String sqlSave = "INSERT INTO tickets(status, passenger_id, created, seat_type, price) VALUES (?, ?, Date(?), ?, ?)";
     private final String sqlGetById = "SELECT * FROM tickets WHERE id = ?";
     private final String sqlGetAll = "SELECT * FROM tickets";
     private final String sqlUpdate = "UPDATE tickets SET status = ?, passenger_id = ?, created = Date(?), seat_type = ?, price = ? WHERE id = ?";
@@ -34,12 +34,11 @@ public class JdbcTicketRepositoryImpl implements TicketRepository {
     public Ticket save(Ticket ticket) {
         try {
             PreparedStatement preparedStatement = ConnectionUtil.getConnection().prepareStatement(sqlSave);
-            preparedStatement.setInt(1, ticket.getId());
-            preparedStatement.setString(2, ticket.getStatus());
-            preparedStatement.setInt(3, ticket.getPassenger().getId());
-            preparedStatement.setString(4, ticket.getCreated());
-            preparedStatement.setString(5, ticket.getSeatType());
-            preparedStatement.setDouble(6, ticket.getPrice());
+            preparedStatement.setString(1, ticket.getStatus());
+            preparedStatement.setInt(2, ticket.getPassenger().getId());
+            preparedStatement.setString(3, ticket.getCreated());
+            preparedStatement.setString(4, ticket.getSeatType());
+            preparedStatement.setDouble(5, ticket.getPrice());
             preparedStatement.execute();
 
             preparedStatement = ConnectionUtil.getConnection().prepareStatement(sqlGetById);

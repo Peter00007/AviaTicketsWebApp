@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcAirportRepositoryImpl implements AirportRepository {
-    private final String sqlSave = "INSERT INTO airports(id, name) VALUES (?, ?)";
+    private final String sqlSave = "INSERT INTO airports(name) VALUES (?)";
     private final String sqlGetById = "SELECT * FROM airports WHERE id = ?";
     private final String sqlGetAll = "SELECT * FROM airports";
     private final String sqlUpdate = "UPDATE airports SET name = ? WHERE id = ?";
@@ -23,8 +23,7 @@ public class JdbcAirportRepositoryImpl implements AirportRepository {
     public Airport save(Airport airport) {
         try {
             PreparedStatement preparedStatement = ConnectionUtil.getConnection().prepareStatement(sqlSave);
-            preparedStatement.setInt(1, airport.getId());
-            preparedStatement.setString(2, airport.getName());
+            preparedStatement.setString(1, airport.getName());
             preparedStatement.execute();
 
             preparedStatement = ConnectionUtil.getConnection().prepareStatement(sqlGetAll);

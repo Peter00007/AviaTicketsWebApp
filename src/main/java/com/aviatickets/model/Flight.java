@@ -1,7 +1,6 @@
 package com.aviatickets.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "flights")
@@ -10,27 +9,40 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "aircraft_id")
     private Aircraft aircraft;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "route_id")
+    private Route route;
     @Column(name = "flight_date")
     private String flightDate;
 
-    @OneToMany(mappedBy = "flight", fetch = FetchType.EAGER)
-    private List<Ticket> tickets;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "flight_routes",
-            joinColumns = @JoinColumn(name = "flight_id"),
-            inverseJoinColumns = @JoinColumn(name = "route_id"))
-    private Route route;
 
     public Flight() {
+    }
+
+    public Flight(Aircraft aircraft, String flightDate) {
+        this.aircraft = aircraft;
+        this.flightDate = flightDate;
     }
 
     public Flight(int id, Aircraft aircraft, String flightDate) {
         this.id = id;
         this.aircraft = aircraft;
+        this.flightDate = flightDate;
+    }
+
+    public Flight(Aircraft aircraft, Route route, String flightDate) {
+        this.aircraft = aircraft;
+        this.route = route;
+        this.flightDate = flightDate;
+    }
+
+    public Flight(int id, Aircraft aircraft, Route route, String flightDate) {
+        this.id = id;
+        this.aircraft = aircraft;
+        this.route = route;
         this.flightDate = flightDate;
     }
 
@@ -50,22 +62,6 @@ public class Flight {
         this.aircraft = aircraft;
     }
 
-    public String getFlightDate() {
-        return flightDate;
-    }
-
-    public void setFlightDate(String flightDate) {
-        this.flightDate = flightDate;
-    }
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
-
     public Route getRoute() {
         return route;
     }
@@ -74,12 +70,21 @@ public class Flight {
         this.route = route;
     }
 
+    public String getFlightDate() {
+        return flightDate;
+    }
+
+    public void setFlightDate(String flightDate) {
+        this.flightDate = flightDate;
+    }
+
 
     @Override
     public String toString() {
         return "Flight{" +
                 "id=" + id +
                 ", aircraft=" + aircraft +
+                ", route=" + route +
                 ", flightDate='" + flightDate + '\'' +
                 '}';
     }

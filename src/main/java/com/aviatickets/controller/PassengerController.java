@@ -1,39 +1,38 @@
 package com.aviatickets.controller;
 
 import com.aviatickets.model.Passenger;
-import com.aviatickets.repository.PassengerRepository;
-import com.aviatickets.repository.jdbc.JdbcPassengerRepositoryImpl;
+import com.aviatickets.service.PassengerService;
 
 import java.util.List;
 
 public class PassengerController {
-    PassengerRepository passengerRepository;
+    PassengerService passengerService;
 
     public PassengerController() {
-        passengerRepository = new JdbcPassengerRepositoryImpl();
+        passengerService = new PassengerService();
     }
 
     public Passenger save(Passenger passenger) {
-        return passengerRepository.save(passenger);
+        return passengerService.save(passenger);
     }
 
     public Passenger getById(int id) {
-        return passengerRepository.getById(id);
+        return passengerService.getById(id);
     }
 
     public List<Passenger> getAll() {
-        return passengerRepository.getAll();
+        return passengerService.getAll();
     }
 
     public Passenger update(Passenger passenger) {
-        return passengerRepository.update(passenger);
+        return passengerService.update(passenger);
     }
 
     public void delete(int id) {
-        passengerRepository.delete(id);
+        passengerService.delete(id);
     }
 
     public void deleteByObject(Passenger passenger) {
-        passengerRepository.deleteByObject(passenger);
+        passengerService.deleteByObject(passenger);
     }
 }

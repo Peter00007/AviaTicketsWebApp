@@ -1,7 +1,8 @@
 package com.aviatickets.repository.hibernate;
 
-import com.aviatickets.model.Aircraft;
-import com.aviatickets.repository.AircraftRepository;
+
+import com.aviatickets.model.Passenger;
+import com.aviatickets.repository.PassengerRepository;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,59 +11,63 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class HibernateAircraftRepositoryImpl implements AircraftRepository {
-    private final String getByIdMessage = "SELECT * FROM aircraft WHERE id = :identifier";
-    private final String getAllMessage = "SELECT * FROM aircraft";
-    private final String deleteByIdMessage = "DELETE FROM aircraft WHERE id = :identifier";
+public class HibernatePassengerRepositoryImpl implements PassengerRepository {
+    private final String getByIdMessage = "SELECT * FROM passengers WHERE id = :identifier";
+    private final String getAllMessage = "SELECT * FROM passengers";
+    private final String deleteByIdMessage = "DELETE FROM passengers WHERE id = :identifier";
 
     @Override
-    public Aircraft save(Aircraft aircraft) {
+    public Passenger save(Passenger passenger) {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        session.save(aircraft);
+        session.save(passenger);
         transaction.commit();
         session.close();
-        return aircraft;
+        return passenger;
     }
 
     @Override
-    public Aircraft getById(Integer id) {
+    public Passenger getById(Integer id) {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getByIdMessage);
         sqlQuery.setInteger("identifier", id);
 
-        Aircraft aircraft = null;
+        Passenger passenger = null;
         List<Object> result = (List<Object>) sqlQuery.list();
         Iterator itr = result.iterator();
         while (itr.hasNext()) {
             Object[] obj = (Object[]) itr.next();
             Integer identifier = Integer.parseInt(String.valueOf(obj[0]));
-            String name = String.valueOf(obj[1]);
-            aircraft = new Aircraft(identifier, name);
+            String firstName = String.valueOf(obj[1]);
+            String lastName = String.valueOf(obj[2]);
+            String birthday = String.valueOf(obj[3]);
+            passenger = new Passenger(identifier, firstName, lastName, birthday);
             break;
         }
         transaction.commit();
         session.close();
-        return aircraft;
+        return passenger;
     }
 
     @Override
-    public List<Aircraft> getAll() {
+    public List<Passenger> getAll() {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getAllMessage);
-        List<Aircraft> list = new ArrayList<>();
+        List<Passenger> list = new ArrayList<>();
         List<Object> result = (List<Object>) sqlQuery.list();
         Iterator itr = result.iterator();
         while (itr.hasNext()) {
             Object[] obj = (Object[]) itr.next();
             Integer identifier = Integer.parseInt(String.valueOf(obj[0]));
-            String name = String.valueOf(obj[1]);
-            Aircraft aircraft = new Aircraft(identifier, name);
-            list.add(aircraft);
+            String firstName = String.valueOf(obj[1]);
+            String lastName = String.valueOf(obj[2]);
+            String birthday = String.valueOf(obj[3]);
+            Passenger passenger = new Passenger(identifier, firstName, lastName, birthday);
+            list.add(passenger);
         }
         transaction.commit();
         session.close();
@@ -70,22 +75,22 @@ public class HibernateAircraftRepositoryImpl implements AircraftRepository {
     }
 
     @Override
-    public Aircraft update(Aircraft aircraft) {
+    public Passenger update(Passenger passenger) {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
-        session.update(aircraft);
+        session.update(passenger);
         transaction.commit();
         session.close();
-        return aircraft;
+        return passenger;
     }
 
     @Override
-    public void deleteByObject(Aircraft aircraft) {
+    public void deleteByObject(Passenger passenger) {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
-        session.delete(aircraft);
+        session.delete(passenger);
         transaction.commit();
         session.close();
     }

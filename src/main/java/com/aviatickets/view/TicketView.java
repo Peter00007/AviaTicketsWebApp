@@ -2,7 +2,6 @@ package com.aviatickets.view;
 
 
 import com.aviatickets.controller.TicketController;
-import com.aviatickets.model.Passenger;
 import com.aviatickets.model.Ticket;
 
 import java.util.Scanner;
@@ -10,6 +9,7 @@ import java.util.Scanner;
 public class TicketView {
     TicketController ticketController;
     PassengerView passengerView;
+    FlightView flightView;
     Scanner in;
 
     private final String firstNameMessage = "Input customer first name";
@@ -35,6 +35,7 @@ public class TicketView {
         ticketController = new TicketController();
         in = new Scanner(System.in);
         passengerView = new PassengerView();
+        flightView = new FlightView();
     }
 
     public void searchTicket() {
@@ -50,39 +51,28 @@ public class TicketView {
     }
 
     public void buyTicket() {
+        System.out.println(statusTicketMessage);
+        String status = in.next();
         System.out.println(passengerIdMessage);
-        int passengerId = in.nextInt();
-        System.out.println(firstNameMessage);
-        String firstName = in.next();
-        System.out.println(lastNameMessage);
-        String lastName = in.next();
-        System.out.println(birthdayMessage);
-        String birthday = in.next();
-        System.out.println(ticketIdMessage);
-        int idTicket = in.nextInt();
-        System.out.println(seatTypeMessage);
-        String seatType = in.next();
-        System.out.println(dateMessage);
-        String dateBuy = in.next();
-        System.out.println(priceMessage);
-        double price = in.nextDouble();
+        int idPassenger = in.nextInt();
         System.out.println(flightIdMessage);
         int idFlight = in.nextInt();
-        Passenger passenger = new Passenger(passengerId, firstName, lastName, birthday);
-        passengerView.passengerController.save(passenger);
-        Ticket ticket = new Ticket(idTicket, "Reserved", passengerView.passengerController.getById(passengerId),
-                dateBuy, seatType, price);
+        System.out.println(dateMessage);
+        String dateBuy = in.next();
+        System.out.println(seatTypeMessage);
+        String seatType = in.next();
+        System.out.println(priceMessage);
+        double price = in.nextDouble();
+        Ticket ticket = new Ticket(status, passengerView.passengerController.getById(idPassenger),
+                flightView.flightController.getById(idFlight), dateBuy, seatType, price);
         System.out.println(ticketController.save(ticket));
-        ticketController.addFlightTicket(idFlight, idTicket);
         System.out.println("\nGood work!\n");
     }
 
     public void returnTicket() {
         System.out.println(ticketIdMessage);
         int idTicket = in.nextInt();
-        System.out.println(flightIdMessage);
-        int idFlight = in.nextInt();
-        ticketController.deleteFlightTicket(idFlight, idTicket);
+        ticketController.delete(idTicket);
         ticketController.delete(idTicket);
         System.out.println("Good work!");
     }
@@ -94,20 +84,20 @@ public class TicketView {
             choice = in.next();
             switch (choice) {
                 case "1":
-                    System.out.println(ticketIdMessage);
-                    int id = in.nextInt();
                     System.out.println(statusTicketMessage);
                     String status = in.next();
                     System.out.println(passengerIdMessage);
                     int idPassenger = in.nextInt();
+                    System.out.println(flightIdMessage);
+                    int idFlight = in.nextInt();
                     System.out.println(dateMessage);
                     String date = in.next();
                     System.out.println(seatTypeMessage);
                     String seatType = in.next();
                     System.out.println(priceMessage);
                     double price = in.nextDouble();
-                    Ticket ticket = new Ticket(id, status, passengerView.passengerController.getById(idPassenger),
-                            date, seatType, price);
+                    Ticket ticket = new Ticket(status, passengerView.passengerController.getById(idPassenger),
+                            flightView.flightController.getById(idFlight), date, seatType, price);
                     System.out.println(ticketController.save(ticket));
                     break;
                 case "2":
@@ -116,7 +106,9 @@ public class TicketView {
                     System.out.println(ticketController.getById(getId));
                     break;
                 case "3":
-                    System.out.println(ticketController.getAll());
+                    for (Ticket tickets : ticketController.getAll()) {
+                        System.out.println(tickets);
+                    }
                     break;
                 case "4":
                     System.out.println(ticketIdMessage);
@@ -125,14 +117,16 @@ public class TicketView {
                     String statusTicket = in.next();
                     System.out.println(passengerIdMessage);
                     int passengerId = in.nextInt();
+                    System.out.println(flightIdMessage);
+                    int idFlightUpdate = in.nextInt();
                     System.out.println(dateMessage);
                     String dateTicket = in.next();
                     System.out.println(seatTypeMessage);
                     String seatTypeTicket = in.next();
                     System.out.println(priceMessage);
                     double priceTicket = in.nextDouble();
-                    Ticket updateTicket = new Ticket(idTicket, statusTicket, passengerView.passengerController.getById(passengerId), dateTicket,
-                            seatTypeTicket, priceTicket);
+                    Ticket updateTicket = new Ticket(idTicket, statusTicket, passengerView.passengerController.getById(passengerId),
+                            flightView.flightController.getById(idFlightUpdate), dateTicket, seatTypeTicket, priceTicket);
                     System.out.println(ticketController.update(updateTicket));
                     break;
                 case "5":
@@ -142,6 +136,8 @@ public class TicketView {
                     String statusTicketDelete = in.next();
                     System.out.println(passengerIdMessage);
                     int passengerIdDelete = in.nextInt();
+                    System.out.println(flightIdMessage);
+                    int idFlightDelete = in.nextInt();
                     System.out.println(dateMessage);
                     String dateTicketDelete = in.next();
                     System.out.println(seatTypeMessage);
@@ -149,7 +145,7 @@ public class TicketView {
                     System.out.println(priceMessage);
                     double priceTicketDelete = in.nextDouble();
                     Ticket deleteTicket = new Ticket(idTicketDelete, statusTicketDelete, passengerView.passengerController.getById(passengerIdDelete),
-                            dateTicketDelete, seatTypeTicketDelete, priceTicketDelete);
+                            flightView.flightController.getById(idFlightDelete), dateTicketDelete, seatTypeTicketDelete, priceTicketDelete);
                     ticketController.deleteByObject(deleteTicket);
                     break;
                 case "6":

@@ -1,7 +1,6 @@
 package com.aviatickets.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "routes")
@@ -13,14 +12,15 @@ public class Route {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "route", fetch = FetchType.EAGER)
-    private List<Flight> flight;
-
     public Route() {
     }
 
     public Route(int id, String name) {
         this.id = id;
+        this.name = name;
+    }
+
+    public Route(String name) {
         this.name = name;
     }
 
@@ -40,13 +40,6 @@ public class Route {
         this.name = name;
     }
 
-    public List<Flight> getFlight() {
-        return flight;
-    }
-
-    public void setFlight(List<Flight> flight) {
-        this.flight = flight;
-    }
 
     @Override
     public String toString() {

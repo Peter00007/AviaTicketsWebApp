@@ -1,7 +1,6 @@
 package com.aviatickets.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "passengers")
@@ -17,14 +16,17 @@ public class Passenger {
     @Column(name = "birthday_day")
     private String birthday;
 
-    @OneToMany(mappedBy = "passenger", fetch = FetchType.EAGER)
-    private List<Ticket> ticketCollections;
-
     public Passenger() {
     }
 
     public Passenger(int id, String firstName, String lastName, String birthday) {
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+    }
+
+    public Passenger(String firstName, String lastName, String birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
@@ -60,14 +62,6 @@ public class Passenger {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
-    }
-
-    public List<Ticket> getTicketCollections() {
-        return ticketCollections;
-    }
-
-    public void setTicketCollections(List<Ticket> ticketCollections) {
-        this.ticketCollections = ticketCollections;
     }
 
     @Override

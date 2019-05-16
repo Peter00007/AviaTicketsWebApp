@@ -2,51 +2,50 @@ package com.aviatickets.controller;
 
 
 import com.aviatickets.model.Ticket;
-import com.aviatickets.repository.TicketRepository;
-import com.aviatickets.repository.jdbc.JdbcTicketRepositoryImpl;
+import com.aviatickets.service.TicketService;
 
 import java.util.List;
 
 public class TicketController {
-    TicketRepository ticketRepository;
+    TicketService ticketService;
 
     public TicketController() {
-        ticketRepository = new JdbcTicketRepositoryImpl();
+        ticketService = new TicketService();
     }
 
     public Ticket save(Ticket ticket) {
-        return ticketRepository.save(ticket);
+        return ticketService.save(ticket);
     }
 
     public Ticket getById(int id) {
-        return ticketRepository.getById(id);
+        return ticketService.getById(id);
     }
 
     public List<Ticket> getAll() {
-        return ticketRepository.getAll();
+        return ticketService.getAll();
     }
 
     public Ticket update(Ticket ticket) {
-        return ticketRepository.update(ticket);
+        return ticketService.update(ticket);
     }
 
     public void delete(int id) {
-        ticketRepository.delete(id);
+        ticketService.delete(id);
     }
 
     public void deleteByObject(Ticket ticket) {
-        ticketRepository.deleteByObject(ticket);
+        ticketService.deleteByObject(ticket);
     }
 
     public List<Ticket> searchTicketByPassenger(String firstName, String lastName) {
-        return ticketRepository.searchTicketByPassenger(firstName, lastName);
+        return ticketService.searchTicketByPassenger(firstName, lastName);
     }
 
     public void addFlightTicket(int idFlight, int idTicket) {
-        ticketRepository.addFlightTicket(idFlight, idTicket);
+        ticketService.addFlightTicket(idFlight, idTicket);
     }
 
     public void deleteFlightTicket(int idFlight, int idTicket) {
-        ticketRepository.deleteFlightTicket(idFlight, idTicket);
+        ticketService.deleteFlightTicket(idFlight, idTicket);
     }
 }

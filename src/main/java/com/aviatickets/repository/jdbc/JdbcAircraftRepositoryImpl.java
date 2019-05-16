@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcAircraftRepositoryImpl implements AircraftRepository {
-    private final String sqlSave = "INSERT INTO aircraft(id, name) VALUES (?, ?)";
+    private final String sqlSave = "INSERT INTO aircraft(name) VALUES (?)";
     private final String sqlGetById = "SELECT * FROM aircraft WHERE id = ?";
     private final String sqlGetAll = "SELECT * FROM aircraft";
     private final String sqlUpdate = "UPDATE aircraft SET name = ? WHERE id = ?";
@@ -24,8 +24,7 @@ public class JdbcAircraftRepositoryImpl implements AircraftRepository {
             PreparedStatement preparedStatement;
 
             preparedStatement = ConnectionUtil.getConnection().prepareStatement(sqlSave);
-            preparedStatement.setInt(1, aircraft.getId());
-            preparedStatement.setString(2, aircraft.getName());
+            preparedStatement.setString(1, aircraft.getName());
             preparedStatement.execute();
 
             preparedStatement = ConnectionUtil.getConnection().prepareStatement(sqlGetAll);

@@ -41,9 +41,8 @@ public class JdbcFlightRepositoryImpl implements FlightRepository {
     public Flight save(Flight flight) {
         try {
             PreparedStatement preparedStatement = ConnectionUtil.getConnection().prepareStatement(sqlSave);
-            preparedStatement.setInt(1, flight.getId());
-            preparedStatement.setInt(2, flight.getAircraft().getId());
-            preparedStatement.setString(3, flight.getFlightDate());
+            preparedStatement.setInt(1, flight.getAircraft().getId());
+            preparedStatement.setString(2, flight.getFlightDate());
             preparedStatement.execute();
 
             preparedStatement = ConnectionUtil.getConnection().prepareStatement(sqlGetAll);

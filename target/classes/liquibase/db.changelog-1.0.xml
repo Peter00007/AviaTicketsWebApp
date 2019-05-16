@@ -1,0 +1,201 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="1.0.0" author="Peter Fediuk">
+
+        <createTable tableName="aircraft">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="airports">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="passengers">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="first_name" type="VARCHAR(100)" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="last_name" type="VARCHAR(100)" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="birthday_day" type="DATE" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="routes">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="route_airports">
+            <column name="route_id" type="INT" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="airport_id" type="INT" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="airport_type" type="VARCHAR(100)" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="route_airports"
+                                 baseColumnNames="route_id"
+                                 constraintName="fk_route_airports_route"
+                                 referencedTableName="routes"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="route_airports"
+                                 baseColumnNames="airport_id"
+                                 constraintName="fk_route_airports_airport"
+                                 referencedTableName="airports"
+                                 referencedColumnNames="id"/>
+
+
+        <createTable tableName="flights">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="aircraft_id" type="INT" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="route_id" type="INT" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="flight_date" type="DATE" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="flights"
+                                 baseColumnNames="aircraft_id"
+                                 constraintName="fk_flights_aircraft"
+                                 referencedTableName="aircraft"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="flights"
+                                 baseColumnNames="route_id"
+                                 constraintName="fk_flights_route"
+                                 referencedTableName="routes"
+                                 referencedColumnNames="id"/>
+
+
+        <createTable tableName="flight_routes">
+            <column name="flight_id" type="INT" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="route_id" type="INT" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="flight_routes"
+                                 baseColumnNames="flight_id"
+                                 constraintName="fk_flight_routes_flight"
+                                 referencedTableName="flights"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="flight_routes"
+                                 baseColumnNames="route_id"
+                                 constraintName="fk_flight_routes_route"
+                                 referencedTableName="routes"
+                                 referencedColumnNames="id"/>
+
+        <createTable tableName="tickets">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="status" type="VARCHAR(100)" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="passenger_id" type="INT" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="flight_id" type="INT" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created" type="DATE" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="seat_type" type="VARCHAR(100)" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="price" type="DOUBLE" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="tickets"
+                                 baseColumnNames="passenger_id"
+                                 constraintName="fk_tickets_passenger"
+                                 referencedTableName="passengers"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="tickets"
+                                 baseColumnNames="flight_id"
+                                 constraintName="fk_tickets_flight"
+                                 referencedTableName="flights"
+                                 referencedColumnNames="id"/>
+
+
+        <createTable tableName="flights_tickets">
+            <column name="ticket_id" type="INT" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="flight_id" type="INT" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="flights_tickets"
+                                 baseColumnNames="ticket_id"
+                                 constraintName="fk_flights_tickets_ticket"
+                                 referencedTableName="tickets"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="flights_tickets"
+                                 baseColumnNames="flight_id"
+                                 constraintName="fk_flights_tickets_flight"
+                                 referencedTableName="flights"
+                                 referencedColumnNames="id"/>
+
+    </changeSet>
+</databaseChangeLog>

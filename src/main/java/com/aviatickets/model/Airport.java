@@ -16,6 +16,10 @@ public class Airport {
 
     }
 
+    public Airport(String name) {
+        this.name = name;
+    }
+
     public Airport(int id, String name) {
         this.id = id;
         this.name = name;

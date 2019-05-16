@@ -33,11 +33,13 @@ public class FlightView {
     Scanner in;
     AircraftView aircraftView;
     FlightController flightController;
+    RouteView routeView;
 
     public FlightView() {
         flightController = new FlightController();
         in = new Scanner(System.in);
         aircraftView = new AircraftView();
+        routeView = new RouteView();
     }
 
     public void searchFlight() {
@@ -63,13 +65,14 @@ public class FlightView {
             choice = in.next();
             switch (choice) {
                 case "1":
-                    System.out.println(idFlightMessage);
-                    int idFlight = in.nextInt();
                     System.out.println(idAircraftMessage);
                     int idAircraft = in.nextInt();
+                    System.out.println(routeIdMessage);
+                    int idRoute = in.nextInt();
                     System.out.println(flightDateMessage);
                     String dateFlight = in.next();
-                    Flight flight = new Flight(idFlight, aircraftView.aircraftController.getById(idAircraft), dateFlight);
+                    Flight flight = new Flight(aircraftView.aircraftController.getById(idAircraft),
+                            routeView.routeController.getById(idRoute), dateFlight);
                     System.out.println(flightController.save(flight));
                     break;
                 case "2":
@@ -78,16 +81,21 @@ public class FlightView {
                     System.out.println(flightController.getById(id));
                     break;
                 case "3":
-                    System.out.println(flightController.getAll());
+                    for (Flight flights : flightController.getAll()) {
+                        System.out.println(flights);
+                    }
                     break;
                 case "4":
                     System.out.println(idFlightMessage);
                     int identifier = in.nextInt();
                     System.out.println(idAircraftMessage);
                     int newIdFlight = in.nextInt();
+                    System.out.println(routeIdMessage);
+                    int idRouteUpdate = in.nextInt();
                     System.out.println(flightDateMessage);
                     String dateForFlight = in.next();
-                    Flight updateFlight = new Flight(identifier, aircraftView.aircraftController.getById(newIdFlight), dateForFlight);
+                    Flight updateFlight = new Flight(identifier, aircraftView.aircraftController.getById(newIdFlight),
+                            routeView.routeController.getById(idRouteUpdate), dateForFlight);
                     System.out.println(flightController.update(updateFlight));
                     break;
                 case "5":
@@ -95,9 +103,12 @@ public class FlightView {
                     int idFlightDelete = in.nextInt();
                     System.out.println(idAircraftMessage);
                     int idAircraftDelete = in.nextInt();
+                    System.out.println(routeIdMessage);
+                    int idRouteDelete = in.nextInt();
                     System.out.println(flightDateMessage);
                     String flightDateDelete = in.next();
-                    Flight deleteFlight = new Flight(idFlightDelete, aircraftView.aircraftController.getById(idAircraftDelete), flightDateDelete);
+                    Flight deleteFlight = new Flight(idFlightDelete, aircraftView.aircraftController.getById(idAircraftDelete),
+                            routeView.routeController.getById(idAircraftDelete), flightDateDelete);
                     flightController.deleteByObject(deleteFlight);
                     break;
                 case "6":

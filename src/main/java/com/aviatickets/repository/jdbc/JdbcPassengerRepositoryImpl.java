@@ -11,7 +11,7 @@ import java.util.List;
 
 public class JdbcPassengerRepositoryImpl implements PassengerRepository {
 
-    private final String sqlSave = "INSERT INTO passengers(id, first_name, last_name, birthday_day) VALUES (?, ?, ?, DATE (?))";
+    private final String sqlSave = "INSERT INTO passengers(first_name, last_name, birthday_day) VALUES (?, ?, DATE (?))";
     private final String sqlGetById = "SELECT * FROM passengers WHERE id = ?";
     private final String sqlGetAll = "SELECT * FROM passengers";
     private final String sqlUpdate = "UPDATE passengers SET first_name = ?, last_name = ?, birthday_day = DATE(?) WHERE id = ?";
@@ -22,10 +22,9 @@ public class JdbcPassengerRepositoryImpl implements PassengerRepository {
     public Passenger save(Passenger passenger) {
         try {
             PreparedStatement preparedStatement = ConnectionUtil.getConnection().prepareStatement(sqlSave);
-            preparedStatement.setInt(1, passenger.getId());
-            preparedStatement.setString(2, passenger.getFirstName());
-            preparedStatement.setString(3, passenger.getLastName());
-            preparedStatement.setString(4, passenger.getBirthday());
+            preparedStatement.setString(1, passenger.getFirstName());
+            preparedStatement.setString(2, passenger.getLastName());
+            preparedStatement.setString(3, passenger.getBirthday());
             preparedStatement.execute();
 
             preparedStatement = ConnectionUtil.getConnection().prepareStatement(sqlGetAll);
