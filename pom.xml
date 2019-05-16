@@ -27,6 +27,7 @@
         </dependency>
     </dependencies>
 
+
     <build>
         <finalName>AviaTicketsWeb</finalName>
         <plugins>
@@ -38,6 +39,27 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-plugin</artifactId>
+                <version>1.9.3.0</version>
+                <configuration>
+                    <propertyfile>src/main/resources/liquibase.properties</propertyfile>
+                    <changelogfile>src/main/resources/db/changelog-master.xml</changelogfile>
+                    <driver>com.mysql.cj.jdbc.Driver</driver>
+                    <url>jdbc:mysql://localhost:3306/aviatickets?serverTimezone=UTC</url>
+                    <username>root</username>
+                    <password>petro777</password>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
