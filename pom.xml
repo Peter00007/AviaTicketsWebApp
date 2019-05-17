@@ -23,7 +23,7 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>3.6.3</version>
+            <version>3.0.7</version>
         </dependency>
     </dependencies>
 
@@ -42,19 +42,14 @@
             </plugin>
             <plugin>
                 <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-plugin</artifactId>
-                <version>1.9.3.0</version>
-                <configuration>
-                    <propertyfile>src/main/resources/liquibase.properties</propertyfile>
-                    <changelogfile>src/main/resources/db/changelog-master.xml</changelogfile>
-                    <driver>com.mysql.cj.jdbc.Driver</driver>
-                    <url>jdbc:mysql://localhost:3306/aviatickets?serverTimezone=UTC</url>
-                    <username>root</username>
-                    <password>petro777</password>
-                </configuration>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.0.7</version>
                 <executions>
                     <execution>
                         <phase>process-resources</phase>
+                        <configuration>
+                            <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
+                        </configuration>
                         <goals>
                             <goal>update</goal>
                         </goals>
