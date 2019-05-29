@@ -17,8 +17,7 @@ public class ConsoleHelper {
             "Enter 4, if you want do crud operation from table passengers\n" +
             "Enter 5, if you want do crud operation from table routes\n" +
             "Enter 6, if you want do crud operation from table tickets\n" +
-            "Enter 7, if you want do create/delete data from table flights_routes\n" +
-            "Enter 8, if you want do create/delete data from table routes_airports\n" +
+            "Enter 7, if you want do create/delete data from table routes_airports\n" +
             "Enter 'Exit', if you want exit from this menu";
 
     Scanner in;
@@ -83,9 +82,6 @@ public class ConsoleHelper {
                                 ticketView.CRUDTicket();
                                 break;
                             case "7":
-                                flightView.CRFlightsRoutes();
-                                break;
-                            case "8":
                                 routeView.CRRouteAirport();
                                 break;
                         }

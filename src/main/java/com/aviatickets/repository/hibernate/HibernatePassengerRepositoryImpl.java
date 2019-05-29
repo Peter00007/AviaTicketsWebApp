@@ -29,7 +29,6 @@ public class HibernatePassengerRepositoryImpl implements PassengerRepository {
     @Override
     public Passenger getById(Integer id) {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getByIdMessage);
         sqlQuery.setInteger("identifier", id);
@@ -46,7 +45,6 @@ public class HibernatePassengerRepositoryImpl implements PassengerRepository {
             passenger = new Passenger(identifier, firstName, lastName, birthday);
             break;
         }
-        transaction.commit();
         session.close();
         return passenger;
     }
@@ -54,7 +52,6 @@ public class HibernatePassengerRepositoryImpl implements PassengerRepository {
     @Override
     public List<Passenger> getAll() {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getAllMessage);
         List<Passenger> list = new ArrayList<>();
@@ -69,7 +66,6 @@ public class HibernatePassengerRepositoryImpl implements PassengerRepository {
             Passenger passenger = new Passenger(identifier, firstName, lastName, birthday);
             list.add(passenger);
         }
-        transaction.commit();
         session.close();
         return list;
     }

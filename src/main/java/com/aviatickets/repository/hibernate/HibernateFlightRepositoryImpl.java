@@ -48,7 +48,6 @@ public class HibernateFlightRepositoryImpl implements FlightRepository {
     @Override
     public Flight getById(Integer id) {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getByIdMessage);
         sqlQuery.setInteger("identifier", id);
@@ -66,7 +65,6 @@ public class HibernateFlightRepositoryImpl implements FlightRepository {
                     routeRepository.getById(idRoute), fligthDate);
             break;
         }
-        transaction.commit();
         session.close();
         return flight;
     }
@@ -74,7 +72,6 @@ public class HibernateFlightRepositoryImpl implements FlightRepository {
     @Override
     public List<Flight> getAll() {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getAllMessage);
         List<Flight> list = new ArrayList<>();
@@ -90,7 +87,6 @@ public class HibernateFlightRepositoryImpl implements FlightRepository {
                     routeRepository.getById(idRoute), fligthDate);
             list.add(flight);
         }
-        transaction.commit();
         session.close();
         return list;
     }
@@ -154,15 +150,5 @@ public class HibernateFlightRepositoryImpl implements FlightRepository {
         transaction.commit();
         session.close();
         return list;
-    }
-
-    @Override
-    public void deleteFlightRoute(int idFlight, int idRoute) {
-
-    }
-
-    @Override
-    public void addFlightRoute(int idFlight, int idRoute) {
-
     }
 }

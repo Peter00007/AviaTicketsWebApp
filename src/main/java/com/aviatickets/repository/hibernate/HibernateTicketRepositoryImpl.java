@@ -42,7 +42,6 @@ public class HibernateTicketRepositoryImpl implements TicketRepository {
     @Override
     public Ticket getById(Integer id) {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getByIdMessage);
         sqlQuery.setInteger("identifier", id);
@@ -63,7 +62,6 @@ public class HibernateTicketRepositoryImpl implements TicketRepository {
                     flightRepository.getById(idFlight), created, seatType, price);
             break;
         }
-        transaction.commit();
         session.close();
         return ticket;
     }
@@ -71,7 +69,6 @@ public class HibernateTicketRepositoryImpl implements TicketRepository {
     @Override
     public List<Ticket> getAll() {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getAllMessage);
         List<Ticket> list = new ArrayList<>();
@@ -90,7 +87,6 @@ public class HibernateTicketRepositoryImpl implements TicketRepository {
                     flightRepository.getById(idFlight), created, seatType, price);
             list.add(ticket);
         }
-        transaction.commit();
         session.close();
         return list;
     }
@@ -155,15 +151,5 @@ public class HibernateTicketRepositoryImpl implements TicketRepository {
         transaction.commit();
         session.close();
         return list;
-    }
-
-    @Override
-    public void addFlightTicket(int idFlight, int idTicket) {
-
-    }
-
-    @Override
-    public void deleteFlightTicket(int idFlight, int idTicket) {
-
     }
 }

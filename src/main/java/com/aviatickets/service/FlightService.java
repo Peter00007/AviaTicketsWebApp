@@ -41,12 +41,4 @@ public class FlightService {
     public List<Flight> searchByFlight(String firstDate, String secondDate, String depAirport, String arrAirport) {
         return flightRepository.searchByFlight(firstDate, secondDate, depAirport, arrAirport);
     }
-
-    public void deleteFlightRoute(int idFlight, int idRoute) {
-        flightRepository.deleteFlightRoute(idFlight, idRoute);
-    }
-
-    public void addFlightRoute(int idFlight, int idRoute) {
-        flightRepository.addFlightRoute(idFlight, idRoute);
-    }
 }

@@ -39,13 +39,5 @@ public class FlightController {
     public List<Flight> searchByFlight(String firstDate, String secondDate, String depAirport, String arrAirport) {
         return flightService.searchByFlight(firstDate, secondDate, depAirport, arrAirport);
     }
-
-    public void deleteFlightRoute(int idFlight, int idRoute) {
-        flightService.deleteFlightRoute(idFlight, idRoute);
-    }
-
-    public void addFlightRoute(int idFlight, int idRoute) {
-        flightService.addFlightRoute(idFlight, idRoute);
-    }
 }
 

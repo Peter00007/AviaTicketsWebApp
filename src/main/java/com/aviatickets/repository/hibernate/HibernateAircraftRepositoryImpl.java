@@ -28,7 +28,6 @@ public class HibernateAircraftRepositoryImpl implements AircraftRepository {
     @Override
     public Aircraft getById(Integer id) {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getByIdMessage);
         sqlQuery.setInteger("identifier", id);
@@ -43,7 +42,6 @@ public class HibernateAircraftRepositoryImpl implements AircraftRepository {
             aircraft = new Aircraft(identifier, name);
             break;
         }
-        transaction.commit();
         session.close();
         return aircraft;
     }
@@ -51,7 +49,6 @@ public class HibernateAircraftRepositoryImpl implements AircraftRepository {
     @Override
     public List<Aircraft> getAll() {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getAllMessage);
         List<Aircraft> list = new ArrayList<>();
@@ -64,7 +61,6 @@ public class HibernateAircraftRepositoryImpl implements AircraftRepository {
             Aircraft aircraft = new Aircraft(identifier, name);
             list.add(aircraft);
         }
-        transaction.commit();
         session.close();
         return list;
     }

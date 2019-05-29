@@ -119,28 +119,4 @@ public class FlightView {
             }
         } while (!choice.equalsIgnoreCase("Exit"));
     }
-
-    public void CRFlightsRoutes() {
-        String choice;
-        do {
-            System.out.println(flightRouteMessage);
-            choice = in.next();
-            switch (choice) {
-                case "1":
-                    System.out.println(idFlightMessage);
-                    int flightId = in.nextInt();
-                    System.out.println(routeIdMessage);
-                    int routeId = in.nextInt();
-                    flightController.addFlightRoute(flightId, routeId);
-                    break;
-                case "2":
-                    System.out.println(idFlightMessage);
-                    int deleteIdFlight = in.nextInt();
-                    System.out.println(routeIdMessage);
-                    int deleteIdRoute = in.nextInt();
-                    flightController.deleteFlightRoute(deleteIdFlight, deleteIdRoute);
-                    break;
-            }
-        } while (!choice.equalsIgnoreCase("Exit"));
-    }
 }

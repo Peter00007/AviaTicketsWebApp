@@ -31,7 +31,6 @@ public class HibernateRouteRepositoryImpl implements RouteRepository {
     @Override
     public Route getById(Integer id) {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getByIdMessage);
         sqlQuery.setInteger("identifier", id);
@@ -46,7 +45,6 @@ public class HibernateRouteRepositoryImpl implements RouteRepository {
             route = new Route(identifier, name);
             break;
         }
-        transaction.commit();
         session.close();
         return route;
     }
@@ -54,7 +52,6 @@ public class HibernateRouteRepositoryImpl implements RouteRepository {
     @Override
     public List<Route> getAll() {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getAllMessage);
         List<Route> list = new ArrayList<>();
@@ -67,7 +64,6 @@ public class HibernateRouteRepositoryImpl implements RouteRepository {
             Route route = new Route(identifier, name);
             list.add(route);
         }
-        transaction.commit();
         session.close();
         return list;
     }

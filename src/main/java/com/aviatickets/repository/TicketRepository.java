@@ -6,8 +6,4 @@ import java.util.List;
 
 public interface TicketRepository extends GenericRepository<Ticket, Integer> {
     List<Ticket> searchTicketByPassenger(String firstName, String lastName);
-
-    void addFlightTicket(int idFlight, int idTicket);
-
-    void deleteFlightTicket(int idFlight, int idTicket);
 }

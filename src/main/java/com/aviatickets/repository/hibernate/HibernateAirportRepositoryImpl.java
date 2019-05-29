@@ -28,7 +28,6 @@ public class HibernateAirportRepositoryImpl implements AirportRepository {
     @Override
     public Airport getById(Integer id) {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getByIdMessage);
         sqlQuery.setInteger("identifier", id);
@@ -43,7 +42,6 @@ public class HibernateAirportRepositoryImpl implements AirportRepository {
             airport = new Airport(identifier, name);
             break;
         }
-        transaction.commit();
         session.close();
         return airport;
     }
@@ -51,7 +49,6 @@ public class HibernateAirportRepositoryImpl implements AirportRepository {
     @Override
     public List<Airport> getAll() {
         Session session = SessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
 
         SQLQuery sqlQuery = session.createSQLQuery(getAllMessage);
         List<Airport> list = new ArrayList<>();
@@ -64,7 +61,6 @@ public class HibernateAirportRepositoryImpl implements AirportRepository {
             Airport airport = new Airport(identifier, name);
             list.add(airport);
         }
-        transaction.commit();
         session.close();
         return list;
     }

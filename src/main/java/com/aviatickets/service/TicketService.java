@@ -40,12 +40,4 @@ public class TicketService {
     public List<Ticket> searchTicketByPassenger(String firstName, String lastName) {
         return ticketRepository.searchTicketByPassenger(firstName, lastName);
     }
-
-    public void addFlightTicket(int idFlight, int idTicket) {
-        ticketRepository.addFlightTicket(idFlight, idTicket);
-    }
-
-    public void deleteFlightTicket(int idFlight, int idTicket) {
-        ticketRepository.deleteFlightTicket(idFlight, idTicket);
-    }
 }
